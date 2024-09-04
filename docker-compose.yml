@@ -1,0 +1,10 @@
+version: '3'
+services:
+  nginx:
+    image: ${DOCKER_USERNAME}/nginx-swarm:${BUILD_NUMBER}
+    ports:
+      - "80:80"
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
