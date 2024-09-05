@@ -2,8 +2,8 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_USERNAME = credentials('khwairakpam.bm@axxonet.net')
-        DOCKER_PASSWORD = credentials('lifegood7775')
+        DOCKER_USERNAME = credentials('dockerhub-credentials')
+        DOCKER_PASSWORD = credentials('dockerhub-credentials')
     }
     
     stages {
@@ -29,13 +29,8 @@ pipeline {
     
     post {
         always {
-            script {
-                // Adding script block to ensure it's within a proper context
-                try {
-                    sh 'docker logout'
-                } catch (e) {
-                    echo "Logout failed: ${e.getMessage()}"
-                }
+            node {
+                sh 'docker logout'
             }
         }
     }
