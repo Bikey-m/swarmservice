@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_USERNAME = credentials('khwairakpam.bm@axxonet.net') // Update with your Docker Hub credentials ID
+        DOCKER_USERNAME = credentials('khwairakpam.bm@axxonet.net')
         DOCKER_PASSWORD = credentials('lifegood7775')
     }
     
@@ -29,8 +29,9 @@ pipeline {
     
     post {
         always {
-            // Simplify to run sh without node or specify a label if needed
-            sh 'docker logout'
+            node {
+                sh 'docker logout'
+            }
         }
     }
 }
