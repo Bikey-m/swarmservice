@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_USERNAME = credentials('bikeyaxxonet')
+        DOCKER_USERNAME = credentials('khwairakpam.bm@axxonet.net')
         DOCKER_PASSWORD = credentials('lifegood7775')
     }
     
@@ -29,7 +29,14 @@ pipeline {
     
     post {
         always {
-            sh 'docker logout'
+            script {
+                // Adding script block to ensure it's within a proper context
+                try {
+                    sh 'docker logout'
+                } catch (e) {
+                    echo "Logout failed: ${e.getMessage()}"
+                }
+            }
         }
     }
 }
